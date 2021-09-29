@@ -31,7 +31,8 @@
     "extends": "eslint:recommended",
     "env": {
       "es2021": true,
-      "node": true
+      "node": true,
+      "jest": true
     }
   },
   "devDependencies": {
@@ -43,11 +44,13 @@
     "css-loader": "^6.3.0",
     "eslint": "^7.32.0",
     "html-webpack-plugin": "^5.3.2",
+    "jest": "^27.2.3",
     "mini-css-extract-plugin": "^2.3.0",
     "nodemon": "^2.0.13",
     "sass": "^1.42.1",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.3.0",
+    "supertest": "^6.1.6",
     "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^3.11.2"
