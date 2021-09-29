@@ -19,7 +19,7 @@ router.get('/facebook',
 router.get('/test_jwt',
   clientSessionController.verifyClientSession,
   (req, res) => {
-    if (res.locals.user) return res.sendStatus(200);
+    if (res.locals.session) return res.sendStatus(200);
     return res.redirect('/');
   }
 )

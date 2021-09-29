@@ -20,18 +20,18 @@ function setClientSession(req, res, next) {
 }
 
 /**
- * Middleware: Verify client session, if valid response object will contain user session info at `res.locals.user`.
+ * Middleware: Verify client session, if valid response object will contain user session info at `res.locals.session`.
  */
 function verifyClientSession(req, res, next) {
   const { jwt_token } = req.cookies;
 
   jwt.verify(jwt_token, jwt_secret.key, (err, jwtResult) => {
     if (err) {
-      console.log(err); // STRETCH replace with server side logging  }
+      console.log(err); // STRETCH replace with server side logging 
     } else {
       delete jwtResult.iat;
       delete jwtResult.exp;
-      res.locals.user = jwtResult;
+      res.locals.session = jwtResult;
     }
     return next();
   });

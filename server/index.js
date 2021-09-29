@@ -1,17 +1,17 @@
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
-const express = require('express');
+
 const mongoose = require('mongoose');
+const express = require('express');
 const cookieParser = require('cookie-parser');
-
-const dbSettings = require('./assets/db.settings.json');
-
-const key = fs.readFileSync(path.resolve(__dirname, './assets/selfsigned.key'));
-const cert = fs.readFileSync(path.resolve(__dirname, './assets/selfsigned.crt'));
 
 const userRouter = require('./routes/userRouter');
 const loginRouter = require('./routes/loginRoutes');
+
+const dbSettings = require('./assets/db.settings.json');
+const key = fs.readFileSync(path.resolve(__dirname, './assets/selfsigned.key'));
+const cert = fs.readFileSync(path.resolve(__dirname, './assets/selfsigned.crt'));
 
 const LOCALHOST = process.env.LOCALHOST || 'localhost';
 const PORT = process.env.PORT || 3000;
@@ -24,6 +24,7 @@ const app = express();
 
 
 /* Middleware */
+app.use(express.json());
 app.use(cookieParser());
 
 
@@ -70,5 +71,6 @@ mongoose.connect(getDBConnectionUrl(dbSettings.username, dbSettings.password, db
   .catch(err => console.error(err));
 
 function getDBConnectionUrl(username, password, databaseName) {
+  if (process.env.NODE_ENV === 'test') return 'mongodb://localhost/paw-test';
   return `mongodb+srv://${username}:${password}@dev-cluster.pqpcc.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
 }
