@@ -6,8 +6,9 @@ const mongoose = require('mongoose');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
-const userRouter = require('./routes/userRouter');
 const loginRouter = require('./routes/loginRoutes');
+const userRouter = require('./routes/userRouter');
+const memoryRouter = require('./routes/memoryRouter');
 
 const dbSettings = require('./assets/db.settings.json');
 const key = fs.readFileSync(path.resolve(__dirname, './assets/selfsigned.key'));
@@ -35,6 +36,7 @@ app.use('/', express.static(path.resolve(__dirname, './../build')));
 /* Routers */
 app.use('/login', loginRouter);
 app.use('/api/user', userRouter);
+app.use('/api/memory', memoryRouter);
 
 
 /* Global 404 */ // TODO custom 404 page instead of express default.

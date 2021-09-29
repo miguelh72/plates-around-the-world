@@ -85,7 +85,7 @@ describe('Test creating and updating Memory in DB', () => {
     expect(updatedMemory).not.toMatchObject(memory1);
 
     await Memory.updateOne(updatedMemory);
-    const result = await Memory.findOne({ _id: mongoose.Types.ObjectId(mem1_id) });
+    const result = await Memory.findById(mem1_id);
     expect(result).toMatchObject(updatedMemory);
   });
 
@@ -96,14 +96,14 @@ describe('Test creating and updating Memory in DB', () => {
     let result = await Memory.find({});
     expect(result).toMatchObject([memory1, memory2]);
 
-    result = await Memory.deleteOne({ _id: mongoose.Types.ObjectId(mem1_id) });
-    expect(result).toMatchObject({ deletedCount: 1 });
+    result = await Memory.findByIdAndRemove(mem1_id);
+    expect(result).toMatchObject(memory1);
 
     result = await Memory.find({});
     expect(result).toMatchObject([memory2]);
 
-    result = await Memory.deleteOne({ _id: mongoose.Types.ObjectId(mem2_id) });
-    expect(result).toMatchObject({ deletedCount: 1 });
+    result = await Memory.findByIdAndRemove(mem2_id);
+    expect(result).toMatchObject(memory2);
 
     result = await Memory.find({});
     expect(result).toHaveLength(0);
