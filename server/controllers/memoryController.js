@@ -50,6 +50,80 @@ async function getClientMemoryObject(req, res, next) {
 }
 
 /**
+ * Middleware: Load an array of front-end schema memories for the country in params. If successful, array will be set in `res.locals.memoryArray`, sorted in reverse chronological order.
+ */
+async function getClientMemoryArrayForCountry(req, res, next) {
+  if (!res.locals.session) return next();
+
+  const { country_name } = req.params;
+  if (!isValidCountry(country_name)) return next({
+    status: 400,
+    response: { error: 'Not a valid country name.' }
+  })
+
+  try {
+    const memories = await Memory.find({
+      user_id: res.locals.session.facebook_id,
+      country_name: new RegExp(country_name, 'i'),
+    }).sort({ 'context.date': -1 });
+
+    res.locals.memoryArray = memories.map(dbMemory => {
+      // below is front-end schema
+      return {
+        memory_id: dbMemory._id.toString(),
+        owner_name: res.locals.session.name,
+        owner_id: dbMemory.user_id,
+        result: dbMemory.user_id,
+        context: dbMemory.context,
+        country_name: dbMemory.country_name,
+        rating: dbMemory.rating,
+      }
+    });
+    // STRETCH load user info for tagged users. Delete any tags to user's that no longer exist. 
+  } catch (err) {
+    return next(err);
+  }
+
+  return next();
+}
+
+/**
+ * Middleware: Load every memory for a user. If successful, `res.locals.countriesObj` will be set to an object with keys being country_name and values being an array of front-end schema memory objects, sorted in reverse chronological order.
+ */
+async function getClientCountriesObject(req, res, next) {
+  if (!res.locals.session) return next();
+
+  try {
+    // STRETCH implement pagination to limit number of memories returned until user asks to view more 
+    const allMemories = await Memory.find({
+      user_id: res.locals.session.facebook_id,
+    }).sort({ 'country_name': 1, 'context.date': -1 });
+
+    res.locals.countriesObj = allMemories.reduce((countriesObj, memory) => {
+      // below is front-end schema
+      const memoryObj = {
+        memory_id: memory._id.toString(),
+        owner_name: res.locals.session.name,
+        owner_id: memory.user_id,
+        result: memory.user_id,
+        context: memory.context,
+        country_name: memory.country_name,
+        rating: memory.rating,
+      };
+
+      countriesObj[memory.country_name] = countriesObj[memory.country_name] ?? [];
+      countriesObj[memory.country_name].push(memoryObj);
+      return countriesObj;
+    }, Object.create(null));
+    // STRETCH load user info for tagged users. Delete any tags to user's that no longer exist. 
+  } catch (err) {
+    return next(err);
+  }
+
+  return next();
+}
+
+/**
  * Middleware: Store memory to DB. If successful, `res.locals.memory` will contain a memory front-end schema.
  */
 async function storeMemory(req, res, next) {
@@ -216,4 +290,11 @@ function round(value, step) {
   return Math.round(value * inv) / inv;
 }
 
-module.exports = { getClientMemoryObject, storeMemory, updateMemory, deleteMemory };
+module.exports = {
+  getClientMemoryObject,
+  getClientMemoryArrayForCountry,
+  getClientCountriesObject,
+  storeMemory,
+  updateMemory,
+  deleteMemory
+};

@@ -5,6 +5,20 @@ const memoryController = require('../controllers/memoryController');
 
 const router = express.Router();
 
+// Get full front-end schema state object.
+router.get('/',
+  clientSessionController.verifyClientSession,
+  memoryController.getClientCountriesObject,
+  (req, res, next) => {
+    if (!res.locals.session) return res.redirect('/');
+    if (res.locals.countriesObj) return res.json(res.locals.countriesObj);
+    return next({
+      status: 500,
+      response: { error: 'Unknown error: failed to create memory with valid session.' }
+    });
+  }
+);
+
 router.get('/:memory_id',
   memoryController.getClientMemoryObject,
   (req, res) => {
@@ -21,7 +35,7 @@ router.post('/',
     if (res.locals.memory) return res.json(res.locals.memory);
     return next({
       status: 500,
-      response: { error: 'Unknown error: failed to creat memory with valid session.' }
+      response: { error: 'Unknown error: failed to create memory with valid session.' }
     });
   }
 );
