@@ -115,6 +115,9 @@ async function storeMemory(req, res, next) {
   return next();
 }
 
+/**
+ * Middleware: Update memory in DB. If successful, `res.locals.memory` will contain a memory front-end schema.
+ */
 async function updateMemory(req, res, next) {
   if (!res.locals.session) return next();
 
@@ -179,11 +182,31 @@ async function updateMemory(req, res, next) {
   return next();
 }
 
+/**
+ * Middleware: Delete memory in DB. If successful, `res.locals.success` will be true.
+ */
 async function deleteMemory(req, res, next) {
   if (!res.locals.session) return next();
 
-  // TODO 
-  next();
+  const { memory_id } = req.params;
+  if (!memory_id.match(/^[0-9a-z]*$/i)) return next({
+    status: 400,
+    response: { error: 'Memory ID must be a alphanumerical.' }
+  })
+
+  // delete memory
+  try {
+    await Memory.findByIdAndDelete(memory_id);
+    res.locals.success = true;
+  } catch (err) {
+    if (err.message.match(/ObjectId/i)) return next({
+      status: 400,
+      response: { error: 'Memory ID must be a valid memory ID. ID does not match schema.' }
+    })
+    return next(err);
+  }
+
+  return next();
 }
 
 // TODO refactor rounding functionality from here to mongoose middleware 

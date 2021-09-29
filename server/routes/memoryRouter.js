@@ -16,10 +16,13 @@ router.get('/:memory_id',
 router.post('/',
   clientSessionController.verifyClientSession,
   memoryController.storeMemory,
-  (req, res) => {
+  (req, res, next) => {
     if (!res.locals.session) return res.redirect('/');
     if (res.locals.memory) return res.json(res.locals.memory);
-    return res.json({ TODO: true }); // TODO 
+    return next({
+      status: 500,
+      response: { error: 'Unknown error: failed to creat memory with valid session.' }
+    });
   }
 );
 
@@ -30,6 +33,19 @@ router.patch('/:memory_id',
     if (!res.locals.session) return res.redirect('/');
     if (res.locals.memory) return res.json(res.locals.memory);
     return res.sendStatus(404);
+  }
+);
+
+router.delete('/:memory_id',
+  clientSessionController.verifyClientSession,
+  memoryController.deleteMemory,
+  (req, res, next) => {
+    if (!res.locals.session) return res.redirect('/');
+    if (res.locals.success) return res.sendStatus(200);
+    return next({
+      status: 500,
+      response: { error: 'Unknown error: failed to delete memory with valid session.' }
+    });
   }
 );
 
