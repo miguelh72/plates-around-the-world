@@ -104,6 +104,8 @@ dist
 .tern-port
 
 # Custom
+build
+
 dist
 *.key
 *.crt
