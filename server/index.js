@@ -9,6 +9,8 @@ const cookieParser = require('cookie-parser');
 const loginRouter = require('./routes/loginRoutes');
 const userRouter = require('./routes/userRouter');
 const memoryRouter = require('./routes/memoryRouter');
+const countriesRouter = require('./routes/countriesRouter');
+
 
 const dbSettings = require('./assets/db.settings.json');
 const key = fs.readFileSync(path.resolve(__dirname, './assets/selfsigned.key'));
@@ -37,6 +39,8 @@ app.use('/', express.static(path.resolve(__dirname, './../build')));
 app.use('/login', loginRouter);
 app.use('/api/user', userRouter);
 app.use('/api/memory', memoryRouter);
+app.use('/api/countries', countriesRouter);
+// TODO /api/info routes 
 
 
 /* Global 404 */ // TODO custom 404 page instead of express default.
@@ -65,14 +69,19 @@ http.createServer(appHttp).listen(PORT, `HTTP server running on http://${LOCALHO
 
 
 /* Connect TO MongoDB && start HTTPS server*/
-mongoose.connect(getDBConnectionUrl(dbSettings.username, dbSettings.password, dbSettings.database))
-  .then(() => {
-    console.log(`\nConnected to MongoDB Atlas DB: ${dbSettings.database}`)
-    https.createServer({ key, cert }, app).listen(PORT, LOCALHOST, () => console.log(`HTTPS Server running on ${BASE_URL}`));
-  })
-  .catch(err => console.error(err));
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect(getDBConnectionUrl(dbSettings.username, dbSettings.password, dbSettings.database))
+    .then(() => {
+      console.log(`\n\nConnected to MongoDB Atlas DB: ${dbSettings.database}`)
+      https.createServer({ key, cert }, app).listen(PORT, LOCALHOST, () => console.log(`HTTPS Server running on ${BASE_URL} \n\n`));
+    })
+    .catch(err => console.error(err));
+}
 
 function getDBConnectionUrl(username, password, databaseName) {
   if (process.env.NODE_ENV === 'test') return 'mongodb://localhost/paw-test';
   return `mongodb+srv://${username}:${password}@dev-cluster.pqpcc.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
 }
+
+// Export app for supertest
+module.exports = app;
