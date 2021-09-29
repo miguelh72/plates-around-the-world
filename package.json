@@ -7,7 +7,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production nodemon server/server.js",
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development concurrently \"webpack serve'\" \"nodemon server/server.js\"",
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack serve --https'\" \"nodemon server/server.js\"",
     "test": "jest"
   },
   "repository": {
@@ -29,11 +29,9 @@
   "homepage": "https://github.com/miguelh72/codesmith-soloproject#readme",
   "eslintConfig": {
     "extends": "eslint:recommended",
-    "env": { "es6": true, "node": true },
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "sourceType": "module",
-      "allowImportExportEverywhere": true
+    "env": {
+      "es2021": true,
+      "node": true
     }
   },
   "devDependencies": {
@@ -55,6 +53,10 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.8",
+    "node-fetch": "^2.6.2",
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"

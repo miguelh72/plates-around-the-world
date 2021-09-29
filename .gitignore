@@ -103,4 +103,10 @@ dist
 # TernJS port file
 .tern-port
 
+# Custom
 dist
+*.key
+*.crt
+*oauth.json
+db.settings.json
+*secret.json

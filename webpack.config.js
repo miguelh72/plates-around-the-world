@@ -44,7 +44,8 @@ module.exports = {
   devServer: {
     publicPath: '/',
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/login': { target: 'https://localhost:3000', secure: false },
+      '/api': { target: 'https://localhost:3000', secure: false },
     },
     hot: true,
   }
