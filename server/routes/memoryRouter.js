@@ -23,19 +23,14 @@ router.post('/',
   }
 );
 
-/*
-router.put('/:memory_id',
+router.patch('/:memory_id',
   clientSessionController.verifyClientSession,
-  userController.updateUserObject,
-  (req, res, next) => {
-    if (res.locals.user) return res.json(res.locals.user);
+  memoryController.updateMemory,
+  (req, res) => {
     if (!res.locals.session) return res.redirect('/');
-    return next({
-      status: 500,
-      response: { error: 'Unknown error: failed to update user with valid session.' }
-    });
+    if (res.locals.memory) return res.json(res.locals.memory);
+    return res.sendStatus(404);
   }
 );
-*/
 
 module.exports = router;

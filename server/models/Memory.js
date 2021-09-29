@@ -13,7 +13,8 @@ const memorySchema = mongoose.Schema({
   // TODO add images with labels 
 })
 
-memorySchema.pre('save', function (next) {
+memorySchema.pre([/save/i, /update/i], function (next) { // TODO why doesnt it run for findByIdAndUpdate? 
+  if (typeof this.rating === 'string') this.rating = parseFloat(this.rating);
   // rating must be between 0 and 5, inclusively.
   this.rating = Math.min(this.rating, 5);
   this.rating = Math.max(this.rating, 0);
