@@ -1,0 +1,47 @@
+@import 'configs';
+
+.country-promo {
+  padding: 30px 20px 40px 20px;
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 0 2px 4px 1px lighten(black, 90%);
+  //border-bottom: 2px solid lighten(black, 80%);
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      margin: 0;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    .plate-suggestion {
+      font-size: 18px;
+
+      strong {
+        color: lighten(black, 40%);
+      }
+    }
+
+    .famous-plate {
+      width: $app-width - 100px;
+      align-self: center;
+      border: 2px solid lighten(yellow, 40%);
+    }
+
+    p:not(.plate-suggestion){
+      width: $app-width - 100px;
+      align-self: center;
+      line-height: 140%;
+
+    }
+  }
+}

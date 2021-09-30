@@ -1,0 +1,32 @@
+@import 'configs';
+
+$nav-padding: 15px;
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid lighten(black, 80%);
+  background-color: lighten(yellow, 40%);
+  padding: 0 $nav-padding;
+
+  position: absolute;
+  bottom: 0;
+  width: $app-width - $nav-padding * 2;
+  height: $nav-height;
+
+  z-index: 2;
+
+  .nav-icon {
+    display: flex;
+    align-items: center;
+    height: $nav-height;
+    padding: 0 15px;
+
+    cursor: pointer;
+
+    img {
+      width: 48px;
+      filter: invert(21%) sepia(9%) saturate(12%) hue-rotate(328deg) brightness(96%) contrast(80%);
+    }
+  }
+}

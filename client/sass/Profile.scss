@@ -1,0 +1,36 @@
+#profile {
+  display: flex;
+  padding: 60px;
+
+  > div {
+    padding: 10px 0 0 30px;
+
+    h2 {
+      margin: 0;
+    }
+    
+    .name {
+      display: flex;
+      align-items: center;
+      
+      img {
+        padding-left: 10px;
+        cursor: pointer;
+      }
+    }
+
+    .edit {
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+
+      input {
+        font-size: 18px;
+        padding: 5px 10px;
+        height: 35px;
+        margin: 20px 0 10px 0;
+      }
+    }
+  }
+
+}

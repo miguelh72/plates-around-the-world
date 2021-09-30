@@ -1,0 +1,13 @@
+#root {
+  header {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid lighten(black, 80%);
+    padding-bottom: 10px;
+    cursor: pointer;
+  
+    h1 {
+      margin-left: -20px;
+    }
+  }
+}

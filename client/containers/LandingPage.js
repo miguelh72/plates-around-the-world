@@ -9,6 +9,7 @@ export default function LandingPage() {
   const [flagUrls, setFlagUrls] = useState([]);
 
   useEffect(() => {
+    // TODO cache this in local storage 
     fetch('/api/countries/flags')
       .then(response => response.json())
       .then(urlArray => {

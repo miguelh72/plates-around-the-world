@@ -5,6 +5,20 @@ const userController = require('./../controllers/userController');
 
 const router = express.Router();
 
+// Get your own user info front-end schema object
+router.get('/',
+  clientSessionController.verifyClientSession,
+  (req, res, next) => {
+    if (!res.locals.session) return res.redirect('/');
+
+    // set user_id param to current user session's facebook_id
+    req.params.user_id = res.locals.session.facebook_id;
+    return next();
+  },
+  userController.getClientUserObject,
+  (req, res) => res.json(res.locals.user)
+);
+
 router.get('/:user_id',
   userController.getClientUserObject,
   (req, res) => res.json(res.locals.user)

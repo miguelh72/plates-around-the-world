@@ -1,1 +1,18 @@
 @import 'shared';
+@import 'configs';
+
+body {
+  overflow: hidden;
+}
+
+#root {
+  width: $app-width;
+  height: 100%;
+  margin: 0 auto;
+
+  background-color: white;
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 0 0 3px 2px lighten(black, 90%);
+}
+
+

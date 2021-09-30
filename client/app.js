@@ -1,15 +1,18 @@
+// main app
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
 
+import store from './redux/store';
 import App from './containers/App';
 
 import 'normalize.css';
 import './sass/app.scss';
 
 ReactDOM.render(
-  <>
-    <h1>Another</h1>
+  <Provider store={store}>
     <App />
-  </>,
+  </Provider>,
   document.getElementById('root')
 );

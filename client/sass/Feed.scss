@@ -1,0 +1,25 @@
+@import 'configs';
+
+#feed {
+  height: calc(100% - $header-height - $nav-height);
+  overflow-y: auto;
+  overflow-x: hidden; 
+
+  div {
+    cursor: pointer;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius:10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

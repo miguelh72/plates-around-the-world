@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=MonteCarlo&family=Open+Sans:wght@400;700&family=Rubik:wght@400;600&display=swap');
 $button-font-family: 'Rubik', sans-serif;
 
+body {
+  background-color: lighten(yellow, 45%)
+}
+
 .logo {
   font-family: 'MonteCarlo', cursive;
   font-size: 64px;
@@ -12,11 +16,24 @@ $button-font-family: 'Rubik', sans-serif;
   margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6, p, a {
+h1, h2, h3, h4, h5, h6, p, a, input {
   font-family: 'Open Sans', sans-serif;
   color: lighten(black, 20%);
 }
 
 button {
   font-family: 'Rubik', sans-serif;
+  font-size: 24px;
+  color: white;
+  background-color: lighten(darkblue, 20%);
+  border-radius: 4px;
+  padding: 5px;
+  box-shadow: 1px 1px 2px 1px lighten(blue, 40%);
+}
+
+$icon-size: 28px;
+.edit-icon {
+  filter: invert(21%) sepia(9%) saturate(12%) hue-rotate(328deg) brightness(96%) contrast(80%);
+  width: $icon-size;
+  height: $icon-size;
 }
