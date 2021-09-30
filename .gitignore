@@ -112,3 +112,4 @@ dist
 *oauth.json
 db.settings.json
 *secret.json
+*.Identifier

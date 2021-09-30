@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './containers/App';
 
 import 'normalize.css';
-import './sass/index.scss';
+import './sass/app.scss';
 
 ReactDOM.render(
   <>

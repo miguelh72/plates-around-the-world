@@ -33,8 +33,9 @@ app.use(cookieParser());
 
 
 /* Static Server */
-app.use('/app', express.static(path.resolve(__dirname, './../build')));
-
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.resolve(__dirname, './../build')));
+}
 
 /* Routers */
 app.use('/login', loginRouter);

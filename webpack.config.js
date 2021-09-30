@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
-    landing: "./client/index.js",
+    landing: "./client/landing.js",
     app: "./client/app.js",
   },
   output: {
@@ -16,12 +16,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './client/public/index.html',
+      template: './client/public/landing.html',
       chunks: ['landing']
     }),
     new HtmlWebpackPlugin({
       filename: 'app/index.html',
-      template: './client/public/index.html',
+      template: './client/public/app.html',
       chunks: ['app']
     }),
     new MiniCssExtractPlugin({
@@ -50,7 +50,23 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
-      }
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true, // webpack@1.x
+              //disable: true, // webpack@2.x and newer
+              //webp: {
+              //  quality: 30,
+              //}
+            },
+          },
+        ],
+      },
     ]
   },
   devServer: {

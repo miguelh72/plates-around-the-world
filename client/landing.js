@@ -3,15 +3,12 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-import App from './containers/App';
+import LandingPage from './components/LandingPage';
 
 import 'normalize.css';
-import './sass/index.scss';
+import './sass/landing.scss';
 
 ReactDOM.render(
-  <>
-    <h1>Hello World!</h1>
-    <App />
-  </>,
+  <LandingPage />,
   document.getElementById('root')
 );
