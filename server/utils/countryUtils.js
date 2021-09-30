@@ -5,14 +5,14 @@ const countryData = require('./../assets/country_data.json');
 /* Optimization Objects */
 const countryNameList = [];
 const countryNamesObj = countryData.reduce((nameObj, country) => {
-  nameObj[country.country.toLocaleLowerCase()] = true;
+  nameObj[country.country.toLowerCase()] = country;
   countryNameList.push(country.country);
   return nameObj;
 }, Object.create(null));
 
 /* Functions */
 function isValidCountry(name) {
-  return countryNamesObj[name.toLocaleLowerCase()];
+  return (name.toLowerCase() in countryNamesObj);
 }
 
 function getAllCountryNames() {
@@ -24,4 +24,8 @@ function getMatchingCountryNames(filter) {
   return getAllCountryNames().filter(name => name.match(rule));
 }
 
-module.exports = { isValidCountry, getAllCountryNames, getMatchingCountryNames };
+function getCountryInfo(name) {
+  return countryNamesObj[name.toLowerCase()];
+}
+
+module.exports = { isValidCountry, getAllCountryNames, getMatchingCountryNames, getCountryInfo };

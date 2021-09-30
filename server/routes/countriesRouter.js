@@ -8,6 +8,7 @@ const memoryController = require('../controllers/memoryController');
 const router = express.Router();
 
 // Get list of countries with optional filter query param
+// TODO cache endpoint 
 router.get('/', (req, res) => {
   let { filter } = req.query;
   if (!filter) return res.json(getAllCountryNames());

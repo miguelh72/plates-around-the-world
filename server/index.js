@@ -10,6 +10,7 @@ const loginRouter = require('./routes/loginRoutes');
 const userRouter = require('./routes/userRouter');
 const memoryRouter = require('./routes/memoryRouter');
 const countriesRouter = require('./routes/countriesRouter');
+const infoRouter = require('./routes/infoRouter');
 
 
 const dbSettings = require('./assets/db.settings.json');
@@ -40,7 +41,7 @@ app.use('/login', loginRouter);
 app.use('/api/user', userRouter);
 app.use('/api/memory', memoryRouter);
 app.use('/api/countries', countriesRouter);
-// TODO /api/info routes 
+app.use('/api/info', infoRouter);
 
 
 /* Global 404 */ // TODO custom 404 page instead of express default.
