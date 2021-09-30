@@ -54,15 +54,19 @@ module.exports = {
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
-          'file-loader',
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[hash].[ext]',
+            },
+          },
           {
             loader: 'image-webpack-loader',
             options: {
-              bypassOnDebug: true, // webpack@1.x
-              //disable: true, // webpack@2.x and newer
               //webp: {
               //  quality: 30,
               //}
+              name: 'dirname/[hash].[ext]',
             },
           },
         ],
