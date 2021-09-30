@@ -22,11 +22,17 @@ export default function CountryPage({ name }) {
       })
   }, []);
 
+  // sort memories in chronological order 
+  let sortedMemories = [...countryMemories].sort((a, b) => {
+    const dateA = new Date(a.context.date), dateB = new Date(b.context.date);
+    return dateB - dateA;
+  });
+
   return (
     <div id='country-page'>
       {!countryInfo && <Splash />}
       {countryInfo && <CountryPromo {...countryInfo} verbose={true} />}
-      {countryMemories.length > 0 && countryMemories.map((memory, i) => <Memory key={i} {...memory} />)}
+      {countryMemories.length > 0 && sortedMemories.map((memory, i) => <Memory key={i} {...memory} />)}
     </div>
   );
 }

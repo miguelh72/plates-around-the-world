@@ -1,0 +1,45 @@
+.memory {
+  padding: 30px;
+  box-shadow: 0 2px 4px 1px lighten(black, 90%);
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+      display: flex;
+
+      h2 {
+        color: lighten(black, 30%);
+        margin: 0;
+      }
+
+      .edit-icon {
+        justify-self: flex-start;
+        cursor: pointer;
+        padding-left: 10px;
+      }
+    }
+
+    .date {
+      justify-self: flex-end;
+    }
+  }
+
+  .details {
+    padding: 0 10px;
+
+    > div {
+      display: flex;
+      align-items: center;
+
+      h3 {
+        margin: 0;
+      }
+
+      .rating {
+        margin-left: 10px;
+      }
+    }
+  }
+}

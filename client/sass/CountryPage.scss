@@ -1,0 +1,10 @@
+@import 'configs';
+
+#country-page {
+  height: calc(100% - $header-height - $nav-height);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+}

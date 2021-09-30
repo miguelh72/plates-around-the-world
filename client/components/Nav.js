@@ -10,14 +10,15 @@ import searchIconUrl from './../assets/icons/outline_search_black_24dp.png';
 export default function Nav({
   navigateToFeed,
   navigateToProfile,
-  navigateToSearch
+  navigateToSearch,
+  navigateToAdd
 }) {
   return (
     <nav>
       <div className='nav-icon' onClick={navigateToFeed}>
         <img src={homeIconUrl} alt='home icon' />
       </div>
-      <div className='nav-icon'>
+      <div className='nav-icon' onClick={navigateToAdd}>
         <img src={addIconUrl} alt='add memory icon' />
       </div>
       <div className='nav-icon' onClick={navigateToProfile}>

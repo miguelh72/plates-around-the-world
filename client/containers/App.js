@@ -12,6 +12,7 @@ import Nav from '../components/Nav';
 import SearchNav from '../components/SearchNav';
 import Profile from './Profile';
 import Search from './Search';
+import Add from './Add';
 
 export default function App() {
   /* Hooks */
@@ -66,6 +67,10 @@ export default function App() {
     setView('search');
   }, []);
 
+  const navigateToAdd = useCallback(() => {
+    setView('add');
+  }, []);
+
   /* Conditional rendering logic */
   const hasAppData = Object.keys(state.user).length > 0;
 
@@ -82,6 +87,10 @@ export default function App() {
         searchTerm={searchTerm}
         navigateToCountry={navigateToCountry}
       />}
+      {hasAppData && view === 'add' && <Add
+        country_name={countryName}
+        navigateToCountry={navigateToCountry}
+      />}
       {hasAppData && view === 'search' && <SearchNav
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
@@ -90,6 +99,7 @@ export default function App() {
       />}
       {hasAppData && view !== 'search' && <Nav
         navigateToFeed={navigateToFeed}
+        navigateToAdd={view === 'country' ? navigateToAdd : navigateToSearch}
         navigateToProfile={navigateToProfile}
         navigateToSearch={navigateToSearch}
       />}

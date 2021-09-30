@@ -1,0 +1,44 @@
+@import "configs";
+
+$field-width: 300px;
+
+#add {
+  height: calc(100% - $header-height - $nav-height);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px 30px;
+
+  .rating {
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 -5px 0;
+  }
+
+  input {
+    font-size: 18px;
+    padding: 5px 10px;
+    height: 35px;
+    margin: 10px 0 20px 0;
+    font-weight: bold;
+    width: $field-width;
+  }
+
+  #restaurant-address {
+    width: $field-width * 1.9;
+  }
+
+  button {
+    width: 120px;
+    margin-top: 20px;
+    cursor: pointer;
+    align-self: center;
+  }
+}
