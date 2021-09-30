@@ -4,16 +4,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./client/index.js",
+  entry: {
+    landing: "./client/index.js",
+    app: "./client/app.js",
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].js',
+    filename: 'scripts/[name].bundle.js',
   },
   mode: process.env.NODE_ENV || "production",
   plugins: [
-    new HtmlWebpackPlugin({ template: './client/public/index.html' }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './client/public/index.html',
+      chunks: ['landing']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'app/index.html',
+      template: './client/public/index.html',
+      chunks: ['app']
+    }),
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: 'styles/[name].css'
     }),
   ],
   module: {

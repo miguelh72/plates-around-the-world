@@ -12,7 +12,7 @@ router.get('/facebook',
   facebookOathController.getUserInfo,
   userController.storeUser,
   clientSessionController.setClientSession,
-  (req, res) => res.redirect('/login/test_jwt')
+  (req, res) => res.redirect('/app')
 );
 
 // TODO remove route

@@ -28,11 +28,23 @@
   },
   "homepage": "https://github.com/miguelh72/codesmith-soloproject#readme",
   "eslintConfig": {
-    "extends": "eslint:recommended",
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:react/jsx-runtime"
+    ],
     "env": {
       "es2021": true,
       "node": true,
-      "jest": true
+      "jest": true,
+      "browser": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "rules": {   
+      "react/jsx-uses-react": "error",   
+      "react/jsx-uses-vars": "error" 
     }
   },
   "devDependencies": {
@@ -43,6 +55,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.3.0",
     "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.26.0",
     "html-webpack-plugin": "^5.3.2",
     "jest": "^27.2.3",
     "mini-css-extract-plugin": "^2.3.0",
@@ -57,6 +70,7 @@
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.8",
     "node-fetch": "^2.6.2",

@@ -33,7 +33,7 @@ app.use(cookieParser());
 
 
 /* Static Server */
-app.use('/', express.static(path.resolve(__dirname, './../build')));
+app.use('/app', express.static(path.resolve(__dirname, './../build')));
 
 
 /* Routers */

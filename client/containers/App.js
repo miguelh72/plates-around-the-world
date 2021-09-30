@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import facebook_oauth from './../../server/assets/facebook_oauth.json';
 
 export default function App(props) {
+  const [hasSession, setHasSession] = useState(false);
+
+  /*
+  useEffect(() => {
+    // attempt to load app state
+    fetch()
+  }, []);
+  */
+
   return (
     <>
+      {hasSession && <h2>User has a session!</h2>}
       <a href={getFacebookRedirectLink(
         facebook_oauth.app_id,
         'https://localhost:8080/login/facebook',
