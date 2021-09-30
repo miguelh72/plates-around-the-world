@@ -24,7 +24,7 @@ router.get('/:user_id',
   (req, res) => res.json(res.locals.user)
 );
 
-router.put('/:user_id',
+router.patch('/:user_id',
   clientSessionController.verifyClientSession,
   userController.updateUserObject,
   (req, res, next) => {

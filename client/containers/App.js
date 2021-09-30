@@ -9,12 +9,15 @@ import Header from './../components/Header';
 import Feed from './../containers/Feed';
 import CountryPage from './../containers/CountryPage';
 import Nav from '../components/Nav';
+import SearchNav from '../components/SearchNav';
 import Profile from './Profile';
+import Search from './Search';
 
 export default function App() {
   /* Hooks */
   const [view, setView] = useState('feed');
   const [countryName, setCountryName] = useState(undefined);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const state = useSelector(state => state);
   const dispatch = useDispatch();
@@ -59,6 +62,10 @@ export default function App() {
     setView('profile');
   }, []);
 
+  const navigateToSearch = useCallback(() => {
+    setView('search');
+  }, []);
+
   /* Conditional rendering logic */
   const hasAppData = Object.keys(state.user).length > 0;
 
@@ -71,7 +78,18 @@ export default function App() {
       {hasAppData && view === 'feed' && <Feed navigateToCountry={navigateToCountry} />}
       {hasAppData && view === 'country' && <CountryPage name={countryName} />}
       {hasAppData && view === 'profile' && <Profile />}
-      {hasAppData && <Nav navigateToFeed={navigateToFeed} navigateToProfile={navigateToProfile} />}
+      {hasAppData && view === 'search' && <Search searchTerm={searchTerm} />}
+      {hasAppData && view === 'search' && <SearchNav
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        navigateToFeed={navigateToFeed}
+        navigateToProfile={navigateToProfile}
+      />}
+      {hasAppData && view !== 'search' && <Nav
+        navigateToFeed={navigateToFeed}
+        navigateToProfile={navigateToProfile}
+        navigateToSearch={navigateToSearch}
+      />}
     </>
   );
 }

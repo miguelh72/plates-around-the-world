@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import './../sass/Nav.scss';
+import './../sass/SearchNav.scss';
 
 import homeIconUrl from './../assets/icons/outline_home_black_24dp.png';
 import addIconUrl from './../assets/icons/outline_add_circle_outline_black_24dp.png';
@@ -10,10 +11,16 @@ import searchIconUrl from './../assets/icons/outline_search_black_24dp.png';
 export default function Nav({
   navigateToFeed,
   navigateToProfile,
-  navigateToSearch
+  searchTerm,
+  setSearchTerm
 }) {
+
+  const handleSearchFieldChange = useCallback(e => {
+    setSearchTerm(e.target.value);
+  }, [setSearchTerm]);
+
   return (
-    <nav>
+    <nav className='search-nav'>
       <div className='nav-icon' onClick={navigateToFeed}>
         <img src={homeIconUrl} alt='home icon' />
       </div>
@@ -23,7 +30,8 @@ export default function Nav({
       <div className='nav-icon' onClick={navigateToProfile}>
         <img src={accountIconUrl} alt='account icon' />
       </div>
-      <div className='nav-icon' onClick={navigateToSearch}>
+      <input type='text' placeholder='Filter by country name' value={searchTerm} onChange={handleSearchFieldChange} />
+      <div className='nav-icon'>
         <img src={searchIconUrl} alt='search icon' />
       </div>
     </nav>

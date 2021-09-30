@@ -23,12 +23,19 @@
       display: flex;
       flex-direction: column;
       width: 250px;
+      margin-top: 10px;
+
+      .error {
+        color: lighten(darkred, 30%);
+        margin: 0 0 -5px 0;
+      }
 
       input {
         font-size: 18px;
         padding: 5px 10px;
         height: 35px;
-        margin: 20px 0 10px 0;
+        margin: 10px 0;
+        font-weight: bold;
       }
     }
   }

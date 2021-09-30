@@ -81,7 +81,7 @@ async function updateUserObject(req, res, next) {
   last_name = last_name.trim();
 
   // names can have any word characters that are not numbers
-  if (![name, first_name, last_name].some(n => n.length === 0 || n.match(/^((?!\d)\w\1)*$/i))) return next({
+  if (![name, first_name, last_name].some(n => n.length === 0 || n.match(/^((?!\d)[\w .]\1)*$/i))) return next({
     status: 400,
     response: { error: 'User name must include only word characters without numbers.' }
   });

@@ -1,29 +1,61 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { changeName } from './../redux/reducers/userReducer';
+
 import './../sass/Profile.scss';
 import editIconUrl from './../assets/icons/outline_edit_black_24dp.png';
 
 import Splash from '../components/Splash';
 
 export default function Profile() {
-  const [isEditingName, setIsEditingName] = useState(false);
-  const [nameFieldValue, setNameFieldValue] = useState('');
 
-  const { name, picture_url } = useSelector(state => {
+  const { name, picture_url, user_id } = useSelector(state => {
     return state.user;
   });
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
+
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [nameFieldValue, setNameFieldValue] = useState(name);
+  const [nameFieldValueError, setNameFieldValueError] = useState(undefined);
 
   const onNameFieldValueChange = useCallback(e => {
     setNameFieldValue(e.target.value);
   }, []);
 
   const handleNameChange = useCallback(() => {
-    console.log('name tried to be changed');
-    // TODO validate 
-    // TODO trigger action 
-  }, []);
+    // validate name
+    const newName = nameFieldValue.trim();
+    if (newName.length === 0 || !newName.match(/^((?!\d)[\w .]\1)*$/i)) {
+      return setNameFieldValueError('Name must include only word characters without numbers.');
+    }
+
+    // handle app state change
+    dispatch(changeName(newName));
+
+    // update server
+    fetch('/api/user/' + user_id, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: newName })
+    }).then(response => {
+      // If user is not authenticated, redirect to landing page
+      if (response.redirected) {
+        window.location.replace(response.url);
+      }
+
+      if (response.status !== 200) {
+        // STRETCH client-side remote error logging 
+        console.error('Bad response from server while updating name: ')
+        console.error({ response });
+      }
+    });
+
+    setIsEditingName(false);
+    setNameFieldValueError(undefined);
+  }, [nameFieldValue, user_id]);
 
   return (
     <div id='profile'>
@@ -43,6 +75,7 @@ export default function Profile() {
               />
             </div>}
             {isEditingName && <div className='edit'>
+              {nameFieldValueError && <p className='error'>{nameFieldValueError}</p>}
               <input
                 type="box"
                 placeholder="Name"
