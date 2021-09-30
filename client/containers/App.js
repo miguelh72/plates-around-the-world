@@ -78,7 +78,10 @@ export default function App() {
       {hasAppData && view === 'feed' && <Feed navigateToCountry={navigateToCountry} />}
       {hasAppData && view === 'country' && <CountryPage name={countryName} />}
       {hasAppData && view === 'profile' && <Profile />}
-      {hasAppData && view === 'search' && <Search searchTerm={searchTerm} />}
+      {hasAppData && view === 'search' && <Search
+        searchTerm={searchTerm}
+        navigateToCountry={navigateToCountry}
+      />}
       {hasAppData && view === 'search' && <SearchNav
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

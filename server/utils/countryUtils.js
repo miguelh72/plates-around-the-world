@@ -3,10 +3,11 @@ const countryData = require('./../assets/country_data.json');
 // TODO unit test countryUtils 
 
 /* Optimization Objects */
-const countryNameList = [];
+// TODO fix test to check for name-sm-flag pairs 
+const countryNameSmFlagPairList = [];
 const countryNamesObj = countryData.reduce((nameObj, country) => {
   nameObj[country.country.toLowerCase()] = country;
-  countryNameList.push(country.country);
+  countryNameSmFlagPairList.push([country.country, country.flagSmUrl]);
   return nameObj;
 }, Object.create(null));
 
@@ -16,7 +17,7 @@ function isValidCountry(name) {
 }
 
 function getAllCountryNames() {
-  return [...countryNameList];
+  return [...countryNameSmFlagPairList];
 }
 
 function getMatchingCountryNames(filter) {

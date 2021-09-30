@@ -1,0 +1,32 @@
+@import 'configs';
+
+#search {
+  height: calc(100% - $header-height - $nav-height);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding: 20px;
+
+  .list-item {
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    cursor: pointer;
+
+    margin: 10px 0;
+
+    box-shadow: 0 1px 2px 1px lighten(black, 90%);
+
+
+    p {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    img {
+      width: 22px;
+      height: 22px;
+      margin-right: 10px;
+    }
+  }
+}

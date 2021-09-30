@@ -25,7 +25,7 @@ async function getRandomCountriesInfo(req, res, next) {
   })
   count = +count;
 
-  const allCountries = countryUtils.getAllCountryNames();
+  const allCountries = countryUtils.getAllCountryNames().map(pair => pair[0]);
   if (count > allCountries.length) count = allCountries.length;
 
   res.locals.info = allCountries
