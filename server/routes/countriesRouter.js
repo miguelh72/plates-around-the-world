@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { getAllCountryNames, getMatchingCountryNames } = require('./../utils/countryUtils');
+const { getAllCountryNames, getMatchingCountryNames, getAllCountryFlagUrlsLarge } = require('./../utils/countryUtils');
 
 const clientSessionController = require('../controllers/clientSessionController');
 const memoryController = require('../controllers/memoryController');
@@ -14,6 +14,11 @@ router.get('/', (req, res) => {
   if (!filter) return res.json(getAllCountryNames());
   filter = filter.trim();
   return res.json(getMatchingCountryNames(filter));
+});
+
+// Get a list of all country flags url for logo animation
+router.get('/flags', (req, res) => {
+  return res.json(getAllCountryFlagUrlsLarge());
 });
 
 // Get all memories matching that country name

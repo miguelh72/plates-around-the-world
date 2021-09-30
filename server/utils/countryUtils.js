@@ -28,4 +28,14 @@ function getCountryInfo(name) {
   return countryNamesObj[name.toLowerCase()];
 }
 
-module.exports = { isValidCountry, getAllCountryNames, getMatchingCountryNames, getCountryInfo };
+function getAllCountryFlagUrlsLarge() {
+  return countryData.map(country => country.flagLgUrl);
+}
+
+module.exports = {
+  isValidCountry,
+  getAllCountryNames,
+  getMatchingCountryNames,
+  getCountryInfo,
+  getAllCountryFlagUrlsLarge
+};

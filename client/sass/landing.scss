@@ -1,3 +1,130 @@
+@import 'shared';
+
 body {
-  background-color: aquamarine;
+  background-color: lighten(yellow, 45%)
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0 0 0;
+
+  h1 {
+    margin-left: -20px;
+  }
+
+  header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+#plate-animation {
+  overflow: hidden;
+  height: 350px;
+
+  $flag-wheel-height: 160px;
+  $flag-wheel-width: 540px;
+
+  #flag-wheel {
+    height: $flag-wheel-height;
+    margin-top: 60px;
+    width: $flag-wheel-width;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #plate-icon {
+    position: relative;
+    top: -$flag-wheel-height - 70px;
+    left: ($flag-wheel-width - 512px) / 2;
+  }
+
+  .mover {
+    display: flex;
+    height: $flag-wheel-height;
+    width: 100%;
+    animation: moveSlideshow 30s linear infinite;
+
+    .flag-large {
+      height: 120px;
+      margin: 0 20px;
+    }
+  }
+
+  @keyframes moveSlideshow {
+    0% {
+      transform: translateX(-1000%); 
+    }
+    100% { 
+      transform: translateX(0%);  
+    }
+  }
+}
+
+#feature {
+  margin: 60px 0 0 0;
+
+  p {
+    font-size: 18px;
+    margin: 30px 0;
+  }
+
+  strong {
+    font-size: 16px;
+  }
+}
+
+$facebook-icon-size: 38px;
+$facebook-button-padding: 6px;
+$facebook-blue: #3b5998;
+
+#facebook-button {
+  text-decoration: none;
+
+  display: block;
+  width: 370px;
+
+  div {
+    display: flex;
+    align-items: center;
+    background-color: $facebook-blue;
+    border-radius: $facebook-button-padding;
+  
+    font-family: $button-font-family;
+    font-weight: 500;
+    font-size: 24px;
+  
+    padding: $facebook-button-padding*2;
+
+    box-shadow: 1px 1px 2px 1px lighten(black, 80%);
+    
+    p {
+      margin: 0 0 0 $facebook-button-padding*4;
+      color: white;
+    }
+  
+    img {
+      width: $facebook-icon-size;
+      height: $facebook-icon-size;
+      filter: invert(100%) sepia(9%) saturate(387%) hue-rotate(56deg) brightness(117%) contrast(100%);
+    }
+  }
+
+  div:active {
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 0 0 3px 5px darken($facebook-blue, 5%) inset;
+  }
+}
+
+#login-panel {
+  margin-top: 60px;
+  padding: 60px 50px;
+  background-color: lighten(yellow, 40%);
+
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 2px 2px 5px 4px lighten(black, 90%);
 }

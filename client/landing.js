@@ -3,7 +3,7 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-import LandingPage from './components/LandingPage';
+import LandingPage from './containers/LandingPage';
 
 import 'normalize.css';
 import './sass/landing.scss';

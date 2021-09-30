@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=MonteCarlo&family=Open+Sans:wght@400;700&family=Rubik:wght@400;600&display=swap');
+$button-font-family: 'Rubik', sans-serif;
+
+.logo {
+  font-family: 'MonteCarlo', cursive;
+  font-size: 64px;
+  color: black;
+  /* color | offset-x | offset-y | blur-radius */
+  text-shadow: lighten(yellow, 30%) 1px 5px 5px;
+
+  padding: 0;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, a {
+  font-family: 'Open Sans', sans-serif;
+  color: lighten(black, 20%);
+}
+
+button {
+  font-family: 'Rubik', sans-serif;
+}
